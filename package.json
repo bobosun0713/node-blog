@@ -1,0 +1,17 @@
+{
+  "name": "node-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/www.js",
+  "scripts": {
+    "dev": "nodemon NODE_ENV=dev ./bin/www.js",
+    "start": "nodemon NODE_ENV=prod ./bin/www.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  }
+}
