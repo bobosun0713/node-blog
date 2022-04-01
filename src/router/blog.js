@@ -1,6 +1,12 @@
 const { getList, getDetail, addBlog, updateBlog, delBlog } = require('../controller/blog')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
+const loginCheck = (req) => {
+  if (!req.session.username) {
+    return Promise.resolve(new ErrorModel('未登錄'))
+  }
+}
+
 const handleBLogRouter = async (req, res) => {
   const method = req.method
   const id = req.query.id
@@ -22,6 +28,10 @@ const handleBLogRouter = async (req, res) => {
   }
 
   if (method === 'POST' && req.path === '/api/blog/new') {
+    const loginCheckResult = loginCheck(req)
+    if (loginCheckResult) {
+      return loginCheckResult
+    }
     try {
       const { insertId } = await addBlog(req.body)
       return new SuccessModel({ id: insertId })
@@ -43,5 +53,5 @@ const handleBLogRouter = async (req, res) => {
     }
   }
 }
-
+3
 module.exports = handleBLogRouter

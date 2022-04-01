@@ -9,7 +9,6 @@ function exec(sql) {
     SQL.query(sql, (err, result) => {
       if (err) {
         reject(err)
-        return
       }
       resolve(result)
     })
