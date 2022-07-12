@@ -5,13 +5,11 @@ const PORT = 8001
 
 const server = http.createServer((req, res) => {
   let pathname = req.url
-  console.log(pathname)
   if (pathname === '/') {
     fs.readFile('./frontend/index.html', (err, data) => {
       res.statusCode = 200
       res.setHeader('Content-Type', 'text/html')
       if (!err) {
-        console.log('no error')
         res.end(data)
         return
       }

@@ -17,6 +17,7 @@ body {
 :root {
   --bg: rgb(180, 232, 232);
   --del: rgb(208, 54, 54);
+  --sure: rgb(57, 57, 228);
   --edit: rgb(12, 173, 12);
   --baseBtn: rgb(19, 178, 186);
 }
@@ -100,6 +101,10 @@ body {
   background: var(--edit);
 }
 .card-control :nth-child(2) {
+  background: var(--sure);
+}
+
+.card-control :nth-child(3) {
   background: var(--del);
 }
 

@@ -7,8 +7,9 @@ const handleBLogRouter = async (req, res) => {
 
   if (method === 'GET' && req.path === '/api/blog/list') {
     try {
-      const result = await getList()
-      return new SuccessModel(JSON.parse(result), 'Blog取得成功')
+      console.log('Call: /api/blog/list')
+      const { blog } = JSON.parse(await getList())
+      return new SuccessModel(blog, 'Blog取得成功')
     } catch (e) {
       return new ErrorModel('Blog資料取得失敗')
     }
@@ -16,6 +17,7 @@ const handleBLogRouter = async (req, res) => {
 
   if (method === 'POST' && req.path === '/api/blog/add') {
     try {
+      console.log('Call: /api/blog/add')
       const result = await addBlog(req.body)
       return new SuccessModel({ id: insertId })
     } catch (e) {
@@ -24,13 +26,15 @@ const handleBLogRouter = async (req, res) => {
   }
 
   if (method === 'POST' && req.path === '/api/blog/update') {
-    const result = updateBlog(id, req.body)
+    console.log('Call: /api/blog/update')
+    const result = await updateBlog(id, req.body)
     if (result) return new SuccessModel()
     else return new ErrorModel('Blog更新失敗')
   }
 
   if (method === 'POST' && req.path === '/api/blog/del') {
-    const result = await delBlog(id, 'bobo')
+    console.log('Call: /api/blog/del')
+    const result = await delBlog(id)
     if (result) {
       return new SuccessModel()
     } else {

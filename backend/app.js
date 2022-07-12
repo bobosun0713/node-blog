@@ -18,21 +18,19 @@ const getPostData = (req) => {
       if (!postData) {
         resolve({})
       }
-      resolve(JSON.parse(postData))
+
+      resolve(!postData || JSON.parse(postData))
     })
   })
 }
 
 const serverHandle = (req, res) => {
   res.setHeader('Content-Type', 'application/json')
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
 
   //* Query
   const url = req.url
   req.path = url.split('?')[0]
   req.query = querystring.parse(url.split('?')[1])
-
   getPostData(req).then(async (data) => {
     req.body = data
 
